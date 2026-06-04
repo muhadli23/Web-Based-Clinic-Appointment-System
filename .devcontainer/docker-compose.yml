@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+      - "3306:3306"
+    volumes:
+      - ..:/workspace
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: clinic_appointment
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: clinic_appointment
+    ports:
+      - "3306:3306"
+    volumes:
+      - ../clinic_appointment.sql:/docker-entrypoint-initdb.d/clinic_appointment.sql
